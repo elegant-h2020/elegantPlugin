@@ -1,0 +1,44 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.elegant.ELEGANTPLUGIN</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>ELEGANTPlugin</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">Ubitech</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+
+    <actions>
+
+        <group id="intellijplugin.DialogAction" text="ELEGANT" description="ELEGANT plugin">
+            <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
+            <action id="com.elegant.plugin.SetDockerEnviroment" class="com.elegant.plugin.SetDockerEnviroment" text="Set Docker-Sandbox"></action>
+            <action id="com.elegant.plugin.CleanDockerAction" class="com.elegant.plugin.CleanDockerAction" text="Remove Docker-Sandbox Artifacts"></action>
+            <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get QueryPlan "></action>
+            <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
+            <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
+            <action id="com.elegant.plugin.ConfigAction" class="com.elegant.plugin.ConfigAction" text="Configuration"></action>
+        </group>
+    </actions>
+
+</idea-plugin>
