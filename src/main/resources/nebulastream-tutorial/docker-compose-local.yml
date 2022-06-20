@@ -28,7 +28,7 @@ services:
       nebulastream-network:
         ipv4_address: 172.31.0.11
   ui:
-    image: elegant-ui:latest
+    image:  plakic/elegant-ui:v1.0
     ports:
       - 3000:3000
     networks:
