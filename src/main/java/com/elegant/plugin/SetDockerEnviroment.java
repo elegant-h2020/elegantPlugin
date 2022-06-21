@@ -45,6 +45,7 @@ public class SetDockerEnviroment extends AnAction {
             System.out.println(tempNESDirectory);
             String path = tempNESDirectory.toFile().getPath()+"/nebulastream-tutorial/docker-compose-local.yml";
             Process process = Runtime.getRuntime().exec("docker-compose  -f " + path  + " up --force-recreate");
+            System.out.println(process.pid());
             Configurations.docker_file_path = path ;
             Configurations.temp_nes_directory = tempNESDirectory.toFile().getPath();
             BufferedReader stdInput = new BufferedReader(new
