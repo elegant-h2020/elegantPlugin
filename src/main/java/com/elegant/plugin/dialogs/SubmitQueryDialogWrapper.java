@@ -42,7 +42,7 @@ public class SubmitQueryDialogWrapper extends com.intellij.openapi.ui.DialogWrap
         panel.add(label("userQuery"),gb.nextLine().next().weightx(0.2));
         panel.add(userQuery,gb.nextLine().next().weightx(0.8));
 
-        panel.add(label("placement"),gb.nextLine().next().weightx(0.2));
+        panel.add(label("Placement(BottomUp or TopDown)"),gb.nextLine().next().weightx(0.2));
         panel.add(placement,gb.nextLine().next().weightx(0.8));
 
         return panel;

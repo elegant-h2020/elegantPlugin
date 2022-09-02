@@ -47,7 +47,7 @@ public class SubmitQueryAction extends AnAction {
 
             try {
                 CloseableHttpResponse response = httpClient.execute(httpPost);
-                Messages.showMessageDialog(e.getProject(),userQuery+ " " + placement ,"Userquery and placement",Messages.getInformationIcon());
+                Messages.showMessageDialog(e.getProject(),userQuery+ " " + placement ,"UserQuery and Placement",Messages.getInformationIcon());
                 Messages.showMessageDialog(e.getProject(), String.valueOf(response.getStatusLine().getStatusCode()),"Status_code",Messages.getInformationIcon());
                 if(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201 ) {
                     String json = EntityUtils.toString(response.getEntity());

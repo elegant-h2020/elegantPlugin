@@ -19,7 +19,7 @@ public class CleanDockerAction extends AnAction {
             Process process = Runtime.getRuntime().exec("docker-compose -f " + Configurations.docker_file_path + " down");
             process.waitFor();
             Runtime.getRuntime().exec("rm  -rf " + Configurations.temp_nes_directory  );
-            Messages.showInfoMessage("Directory : "+Configurations.temp_nes_directory+ " Deleted","Remove Artifacts");
+            Messages.showInfoMessage("Docker Artifcats "+ " Deleted","Remove Artifacts");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         } catch (InterruptedException ex) {

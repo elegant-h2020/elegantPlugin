@@ -32,12 +32,13 @@
 
         <group id="intellijplugin.DialogAction" text="ELEGANT" description="ELEGANT plugin">
             <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
-            <action id="com.elegant.plugin.SetDockerEnviroment" class="com.elegant.plugin.SetDockerEnviroment" text="Set Docker-Sandbox"></action>
-            <action id="com.elegant.plugin.CleanDockerAction" class="com.elegant.plugin.CleanDockerAction" text="Remove Docker-Sandbox Artifacts"></action>
+            <action id="com.elegant.plugin.SetDockerEnviroment" class="com.elegant.plugin.SetDockerEnviroment" text="Install ELEGANT-Docker-Sandbox"></action>
+            <action id="com.elegant.plugin.CleanDockerAction" class="com.elegant.plugin.CleanDockerAction" text="Remove ELEGANT-Docker Artifacts"></action>
+            <action id="com.elegant.plugin.ConfigAction" class="com.elegant.plugin.ConfigAction" text="Configuration"></action>
+            <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan "></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
-            <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
-            <action id="com.elegant.plugin.ConfigAction" class="com.elegant.plugin.ConfigAction" text="Configuration"></action>
+
         </group>
     </actions>
 

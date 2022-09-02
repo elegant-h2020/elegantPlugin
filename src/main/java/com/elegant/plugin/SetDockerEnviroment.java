@@ -48,6 +48,9 @@ public class SetDockerEnviroment extends AnAction {
             System.out.println(process.pid());
             Configurations.docker_file_path = path ;
             Configurations.temp_nes_directory = tempNESDirectory.toFile().getPath();
+            //Default values of Configuration
+            Configurations.coordinator_ip="localhost";
+            Configurations.coordinator_port="8081";
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(process.getInputStream()));
 
@@ -73,7 +76,11 @@ public class SetDockerEnviroment extends AnAction {
 */
 
 
-            Messages.showMessageDialog(e.getProject(),"Visit localhost:3000","Enviroment Set Up",Messages.getInformationIcon());
+            Messages.showMessageDialog(e.getProject(),"Docker Services are running \n" +
+                    "Visit localhost:3000 for ELEGANT UI\n" +
+                    "ELEGANT Coordinator set on port 8081\n" +
+                    "Instructions for Keyckloack user administration on \n" +
+                    "https://github.com/elegant-h2020/elegantPlugin/blob/main/keyckloack_info/Keycloack_Info.md","Enviroment Set Up",Messages.getInformationIcon());
 
             //printResults(process);
         } catch (IOException ex) {
