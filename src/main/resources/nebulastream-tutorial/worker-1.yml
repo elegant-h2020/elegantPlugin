@@ -8,9 +8,11 @@ logLevel: LOG_ERROR
 ###
 ### Network configuration
 ###
-localWorkerIp: 172.31.0.3
-coordinatorIp: coordinator
-
+#localWorkerIp: 172.31.0.3
+#coordinatorIp: coordinator
+coordinatorPort: 1200
+rpcPort: 1215
+dataPort: 1415
 ###
 ### Physical source configuration
 ###

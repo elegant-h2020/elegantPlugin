@@ -10,9 +10,13 @@ optimizer:
 ###
 ### Network configuration
 ###
-restIp: 172.31.0.2
-coordinatorIp: 172.31.0.2
-restPort: 8081
+#restIp: 172.31.0.2
+#coordinatorIp: 172.31.0.2
+#restPort: 8081
+restPort: 8000
+enableMonitoring : true
+rpcPort: 1200
+
 
 ###
 ### Logical source configuration
