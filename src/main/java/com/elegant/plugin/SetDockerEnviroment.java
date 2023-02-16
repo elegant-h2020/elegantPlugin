@@ -57,6 +57,7 @@ public class SetDockerEnviroment extends AnAction {
             BufferedReader stdError = new BufferedReader(new
                     InputStreamReader(process.getErrorStream()));
 
+
 // Read the output from the commandmthis was bloacking the app
 /*
             System.out.println("Here is the standard output of the command:\n");
