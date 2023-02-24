@@ -11,4 +11,8 @@ public class Configurations {
     public static String coordinator_port;
     public static String docker_file_path;
     public static String temp_nes_directory;
+    public static String temp_verific_directory;
+
+    public static String docker_verif_file_path;
+
 }

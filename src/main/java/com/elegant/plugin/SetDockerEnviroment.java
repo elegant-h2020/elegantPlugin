@@ -40,8 +40,6 @@ public class SetDockerEnviroment extends AnAction {
                 }
             }
 
-
-
             System.out.println(tempNESDirectory);
             String path = tempNESDirectory.toFile().getPath()+"/nebulastream-tutorial/docker-compose-local.yml";
             Process process = Runtime.getRuntime().exec("docker-compose  -f " + path  + " up --force-recreate");
@@ -51,31 +49,6 @@ public class SetDockerEnviroment extends AnAction {
             //Default values of Configuration
             Configurations.coordinator_ip="localhost";
             Configurations.coordinator_port="8081";
-            BufferedReader stdInput = new BufferedReader(new
-                    InputStreamReader(process.getInputStream()));
-
-            BufferedReader stdError = new BufferedReader(new
-                    InputStreamReader(process.getErrorStream()));
-
-
-// Read the output from the commandmthis was bloacking the app
-/*
-            System.out.println("Here is the standard output of the command:\n");
-            String s = null;
-            while ((s = stdInput.readLine()) != null) {
-                System.out.println(s);
-            }
-*/
-
-// Read any errors from the attempted command.this was also blocking
-            //keep for debug
-/*
-            System.out.println("Here is the standard error of the command (if any):\n");
-            while ((s = stdError.readLine()) != null) {
-                System.out.println(s);
-            }
-*/
-
 
             Messages.showMessageDialog(e.getProject(),"Docker Services are running \n" +
                     "Visit localhost:3000 for ELEGANT UI\n" +

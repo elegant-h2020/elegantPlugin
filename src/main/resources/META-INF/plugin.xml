@@ -38,7 +38,8 @@
             <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan "></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
-
+            <action id="com.elegant.plugin.SetDockerVerificationService" class="com.elegant.plugin.SetDockerVerificationService" text="Set Docker Verification Service"></action>
+            <action id="com.elegant.plugin.CleanDockerVerification" class="com.elegant.plugin.CleanDockerVerification" text="Remove Docker VerificationService"></action>
         </group>
     </actions>
 
