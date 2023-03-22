@@ -15,4 +15,8 @@ public class Configurations {
 
     public static String docker_verif_file_path;
 
+    public static String verif_service_ip;
+
+    public static String verif_service_port;
+
 }

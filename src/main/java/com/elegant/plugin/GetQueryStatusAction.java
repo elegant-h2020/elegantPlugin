@@ -17,7 +17,7 @@ import java.io.IOException;
 public class GetQueryStatusAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        CloseableHttpClient httpClient = httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient =  HttpClients.createDefault();
         String host = Configurations.coordinator_ip;
         String port = Configurations.coordinator_port;
         String str = Messages.showInputDialog(e.getProject(), "Enter queryID", "Get Status Query", Messages.getInformationIcon());

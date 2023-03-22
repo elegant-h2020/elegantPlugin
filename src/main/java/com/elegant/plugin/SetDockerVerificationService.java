@@ -5,9 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.zip.ZipInputStream;
@@ -26,7 +24,7 @@ public class SetDockerVerificationService extends AnAction {
         try {
 
             //Copy zip to temp Folder
-            InputStream verifFolder = getClass().getClassLoader().getResourceAsStream("Verification-Service.zip");
+            InputStream verifFolder = getClass().getClassLoader().getResourceAsStream("VerificationService.zip");
             Path tempVERIFDirectory = Files.createTempDirectory("verification-service");
 
             if (verifFolder != null) {
@@ -35,26 +33,29 @@ public class SetDockerVerificationService extends AnAction {
                     extract(zipInputStream, tempVERIFDirectory.toFile());
                 }
             }
-            System.out.println(tempVERIFDirectory);
-
-            String path = tempVERIFDirectory.toFile().getPath()+"/Elegant-Code-Verification-Service-main/docker/";
+            String path = tempVERIFDirectory.toFile().getPath()+"/Elegant-Code-Verification-Service-main/";
             File f_path = new File(path);
+
+            //Delete pre-built containers just in case
+            Process deleteprocess = Runtime.getRuntime().exec("docker rm elegant-code-verification-container", null, f_path);
+
+            deleteprocess.waitFor();
+
             Process process = Runtime.getRuntime().exec(
-                    "docker-sync start",null,f_path);
+                    "docker build -t code-verification-service-container .",null,f_path);
 
             process.waitFor();
 
             Process process2 = Runtime.getRuntime().exec(
-                    "docker-compose up --no-start",null,f_path);
-
-            process2.waitFor();
-
-            Process process3 = Runtime.getRuntime().exec(
-                            "docker start code-verification-service-container",null,f_path);
+                    "docker run --name elegant-code-verification-container -i -p 8080:8080 code-verification-service-container",null,f_path);
 
             Configurations.temp_verific_directory = tempVERIFDirectory.toFile().getPath();
 
             Configurations.docker_verif_file_path = path ;
+
+            Configurations.verif_service_ip = "localhost";
+
+            Configurations.verif_service_port = "8080";
 
             Messages.showMessageDialog(e.getProject(),"Docker Verification Service is running on port 8080 \n","Enviroment Set Up",Messages.getInformationIcon());
 
