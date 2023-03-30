@@ -38,11 +38,13 @@
             <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan "></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
+            <action id="com.elegant.plugin.ConfigVerificationAction" class="com.elegant.plugin.ConfigVerificationAction" text="Configure Ver.Service IP:Port"></action>
             <action id="com.elegant.plugin.SetDockerVerificationService" class="com.elegant.plugin.SetDockerVerificationService" text="Set Docker Verification Service"></action>
             <action id="com.elegant.plugin.CleanDockerVerification" class="com.elegant.plugin.CleanDockerVerification" text="Remove Docker VerificationService"></action>
             <action id="com.elegant.plugin.VerifyClassAction" class="com.elegant.plugin.VerifyClassAction" text="Verify Code"></action>
-            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="ESBMC Verification"></action>
-            <action id="com.elegant.plugin.GetVerificationAction" class="com.elegant.plugin.GetVerificationAction" text="Get Verification Status"></action>
+            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="Get ESBMC Verification"></action>
+            <action id="com.elegant.plugin.GetVerificationStatusAction" class="com.elegant.plugin.GetVerificationStatusAction" text="Get Verification Status"></action>
+            <action id="com.elegant.plugin.GetVerificationResults" class="com.elegant.plugin.GetVerificationResults" text="Get Verification Results"></action>
         </group>
     </actions>
 

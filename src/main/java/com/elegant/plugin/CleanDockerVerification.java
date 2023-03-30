@@ -17,13 +17,25 @@ public class CleanDockerVerification extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         try {
-            //Stop docker container.
-//            Process process = Runtime.getRuntime().exec("docker-compose down",null,new File(Configurations.docker_verif_file_path));
-//            process.waitFor();
-//            Runtime.getRuntime().exec("rm  -rf " + Configurations.temp_verific_directory  );
             Process process = Runtime.getRuntime().exec("docker stop elegant-code-verification-container ",null,new File(Configurations.docker_verif_file_path));
+
             process.waitFor();
+
             Process process2 = Runtime.getRuntime().exec("docker rm elegant-code-verification-container ",null,new File(Configurations.docker_verif_file_path));
+
+            process2.waitFor();
+
+            Process clean_vol = Runtime.getRuntime().exec("docker volume rm service_files");
+
+            clean_vol.waitFor();
+
+            Process rm_tmp_verif_folder = Runtime.getRuntime().exec("rm -rf "+Configurations.temp_verific_directory);
+
+            rm_tmp_verif_folder.waitFor();
+
+            Process rm_tmp_storage = Runtime.getRuntime().exec("rm -rf "+Configurations.verif_volume_dir);
+
+            rm_tmp_storage.waitFor();
 
             Messages.showInfoMessage("Docker VerificationService Artifcats "+ " Deleted","Remove Artifacts");
         } catch (IOException ex) {

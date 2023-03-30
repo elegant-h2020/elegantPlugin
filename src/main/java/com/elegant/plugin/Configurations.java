@@ -19,4 +19,6 @@ public class Configurations {
 
     public static String verif_service_port;
 
+    public static String verif_volume_dir;
+
 }

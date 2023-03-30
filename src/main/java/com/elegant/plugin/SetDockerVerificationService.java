@@ -21,16 +21,23 @@ public class SetDockerVerificationService extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
+
         try {
+
+            //Create temp for volume
+            Path verif_vol_storage = Files.createTempDirectory("verif_storage");
+            Configurations.verif_volume_dir = verif_vol_storage.toString();
 
             //Copy zip to temp Folder
             InputStream verifFolder = getClass().getClassLoader().getResourceAsStream("VerificationService.zip");
             Path tempVERIFDirectory = Files.createTempDirectory("verification-service");
 
+
             if (verifFolder != null) {
                 try (ZipInputStream zipInputStream = new ZipInputStream(verifFolder)) {
                     // Extract the zip contents and keep in temp directory
                     extract(zipInputStream, tempVERIFDirectory.toFile());
+
                 }
             }
             String path = tempVERIFDirectory.toFile().getPath()+"/Elegant-Code-Verification-Service-main/";
@@ -46,8 +53,15 @@ public class SetDockerVerificationService extends AnAction {
 
             process.waitFor();
 
+            Process process_cr_volume = Runtime.getRuntime().exec(
+                    "docker volume create service_files"
+            );
+
+            process_cr_volume.waitFor();
+
             Process process2 = Runtime.getRuntime().exec(
-                    "docker run --name elegant-code-verification-container -i -p 8080:8080 code-verification-service-container",null,f_path);
+                    "docker run --name elegant-code-verification-container -v "+Configurations.verif_volume_dir+":/service/files -i -p 8080:8080 code-verification-service-container",null,f_path);
+
 
             Configurations.temp_verific_directory = tempVERIFDirectory.toFile().getPath();
 
@@ -57,6 +71,8 @@ public class SetDockerVerificationService extends AnAction {
 
             Configurations.verif_service_port = "8080";
 
+            //printResults(process2);
+
             Messages.showMessageDialog(e.getProject(),"Docker Verification Service is running on port 8080 \n","Enviroment Set Up",Messages.getInformationIcon());
 
         } catch (IOException ex) {
@@ -65,4 +81,16 @@ public class SetDockerVerificationService extends AnAction {
             throw new RuntimeException(ex);
         }
     }
+
+
+
+    public static void printResults(Process process) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+    }
 }
+
+
