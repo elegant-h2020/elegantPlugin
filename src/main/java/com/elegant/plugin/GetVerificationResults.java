@@ -128,7 +128,6 @@ public class GetVerificationResults extends AnAction {
             CloseableHttpResponse response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
                 String json_string = EntityUtils.toString(response.getEntity());
-
             }
             response.close();
 
@@ -146,6 +145,7 @@ public class GetVerificationResults extends AnAction {
 
     public static String getLastPart(String string) {
         String[] parts = string.split("_");
+        parts = parts[parts.length-1].split(".json");
         return parts[parts.length - 1];
     }
 
