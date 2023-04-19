@@ -5,7 +5,7 @@ operators constitute the basic building blocks to build Big Data/IoT application
 implemented in a way that enables their execution on both the IoT side and the Big Data side.
 ## How To Install
 
-1. In order to install locally on Intellij platform download the zip file which contains the packaged application under `build/distributions`
+1. In order to install locally on Intellij platform download the zip file which contains the packaged application `ELEGANTPlugin-1.0-SNAPSHOT.jar`
 2. Select Files and then Settings attribute from the main IntelliJ toolbar
 3. In the displayed panel select Plugins and Install Plugin from Disk.
    ![Alt text](images/elegant.png?raw=true "Title")
