@@ -32,22 +32,21 @@ public class GetVerificationResults extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
-        //GetEntries end of fucking story.. na
-        //xtuphsw to api
-        //kai na parw to response na dw ti einai
-        getEntriesLoop();
-
         String volume_dir = Configurations.verif_volume_dir;
         File tmpFolder = new File(volume_dir);
-        
-
         File[] filesInTmpFolder = tmpFolder.listFiles();
+
+        //Used to get the result Files
+        getEntriesLoop();
+
         if (filesInTmpFolder == null || filesInTmpFolder.length == 0) {
             Messages.showInfoMessage("No files in temporary folder.", "Success");
             return;
         }
 
+        //Create the actual file names
         String[] fileNames = new String[filesInTmpFolder.length];
+        //Create the actual virtual file names
         String[] output_file_names = new String[filesInTmpFolder.length];
         for (int i = 0; i < filesInTmpFolder.length; i++) {
             fileNames[i] = filesInTmpFolder[i].getName();
@@ -75,7 +74,9 @@ public class GetVerificationResults extends AnAction {
     }
 
 
+/*
 
+ */
     public void getEntriesLoop(){
 
         String host = Configurations.verif_service_ip;
@@ -84,14 +85,12 @@ public class GetVerificationResults extends AnAction {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/getEntries");
         int count =0 ;
-        //HttpGet httpGet = new HttpGet("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/getEntry?entryId="+entry_id);
+
         try {
             CloseableHttpResponse response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 202) {
                 String json_string = EntityUtils.toString(response.getEntity());
-
                 JSONParser parser = new JSONParser();
-                //JSONObject json = (JSONObject) parser.parse(json_string);
                 JSONArray jsonArray = (JSONArray) parser.parse(json_string);
                 count = jsonArray.size();
             }
@@ -123,6 +122,7 @@ public class GetVerificationResults extends AnAction {
 
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        //Need the Get reques to get the file
         HttpGet httpGet = new HttpGet("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/getEntry?entryId="+entry_id);
         try {
             CloseableHttpResponse response = httpClient.execute(httpGet);
