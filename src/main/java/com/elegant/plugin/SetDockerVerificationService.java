@@ -48,10 +48,13 @@ public class SetDockerVerificationService extends AnAction {
 
             deleteprocess.waitFor();
 
-            Process process = Runtime.getRuntime().exec(
-                    "docker build -t code-verification-service-container .",null,f_path);
+            /*
+               If image not prebuild it may be slow
+             */
+//            Process process = Runtime.getRuntime().exec(
+//                    "docker build -t code-verification-service-container .",null,f_path);
 
-            process.waitFor();
+            //process.waitFor();
 
             Process process_cr_volume = Runtime.getRuntime().exec(
                     "docker volume create service_files"

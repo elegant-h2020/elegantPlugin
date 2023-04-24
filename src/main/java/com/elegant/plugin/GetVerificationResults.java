@@ -1,5 +1,7 @@
 package com.elegant.plugin;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -44,9 +46,9 @@ public class GetVerificationResults extends AnAction {
             return;
         }
 
-        //Create the actual file names
+        //Create struct for the real file names
         String[] fileNames = new String[filesInTmpFolder.length];
-        //Create the actual virtual file names
+        //Create struct for the virtual file names
         String[] output_file_names = new String[filesInTmpFolder.length];
         for (int i = 0; i < filesInTmpFolder.length; i++) {
             fileNames[i] = filesInTmpFolder[i].getName();
@@ -70,6 +72,7 @@ public class GetVerificationResults extends AnAction {
                 return;
             }
             editorManager.openFile(virtualFile, true);
+            //Print Additional info
         }
     }
 
@@ -122,12 +125,37 @@ public class GetVerificationResults extends AnAction {
 
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-        //Need the Get reques to get the file
+        //Need the Get request to get the file
         HttpGet httpGet = new HttpGet("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/getEntry?entryId="+entry_id);
         try {
             CloseableHttpResponse response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
                 String json_string = EntityUtils.toString(response.getEntity());
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(json_string);
+                String key="taskId";
+                if (jsonNode.has(key)) {
+                    String value = jsonNode.get(key).asText();
+                    System.out.println("Value for key '" + key + "' is: " + value);
+                } else {
+                    System.out.println("JSON does not contain key '" + key + "'");
+                }
+                String key2 = "request";
+                if (jsonNode.has(key2)) {
+                    String value = jsonNode.get(key2).get("className").asText();
+                    System.out.println("Value for key '" + key + "' is: " + value);
+                }
+                String key3 = "methodName";
+                if (jsonNode.has(key2)) {
+                    String value = jsonNode.get(key2).get("methodName").asText();
+                    System.out.println("Value for key '" + key + "' is: " + value);
+                }
+                String key4 = "verificationTool";
+                if (jsonNode.has(key2)) {
+                    String value = jsonNode.get(key4).asText();
+                    System.out.println("Value for key '" + key + "' is: " + value);
+                }
+
             }
             response.close();
 

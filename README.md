@@ -13,3 +13,10 @@ implemented in a way that enables their execution on both the IoT side and the B
    If all the above steps have been followed successfully, the toolbar should look like this:
    ![Alt text](images/elegant2.png?raw=true "Title")
    By clicking on ELEGANT button on the toolbar the list of functionalities is displayed. 
+
+### NOTES
+1. Setting up docker-containers via ELEGANT-Plugin can be time-consuming. Thus is
+recommended to have images pre-built (e.g https://github.com/elegant-h2020/Elegant-Code-Verification-Service).
+```bash
+docker build -t code-verification-service-container .
+```
