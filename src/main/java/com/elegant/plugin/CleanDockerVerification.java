@@ -28,7 +28,6 @@ public class CleanDockerVerification extends AnAction {
             Process clean_vol = Runtime.getRuntime().exec("docker volume rm service_files");
 
             clean_vol.waitFor();
-
             Process rm_tmp_verif_folder = Runtime.getRuntime().exec("rm -rf "+Configurations.temp_verific_directory);
 
             rm_tmp_verif_folder.waitFor();

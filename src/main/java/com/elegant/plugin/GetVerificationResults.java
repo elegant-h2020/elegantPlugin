@@ -10,7 +10,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -20,10 +19,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ioannis Plakas
@@ -31,15 +31,20 @@ import java.util.ArrayList;
  * @date 3/28/23
  */
 public class GetVerificationResults extends AnAction {
+
+
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
         String volume_dir = Configurations.verif_volume_dir;
         File tmpFolder = new File(volume_dir);
-        File[] filesInTmpFolder = tmpFolder.listFiles();
 
-        //Used to get the result Files
-        getEntriesLoop();
+
+        //Used to get the result Files and metadata for each file
+        ArrayList<HashMap> list_metadata = getEntriesLoop();
+
+        //List result files
+        File[] filesInTmpFolder = tmpFolder.listFiles();
 
         if (filesInTmpFolder == null || filesInTmpFolder.length == 0) {
             Messages.showInfoMessage("No files in temporary folder.", "Success");
@@ -72,15 +77,18 @@ public class GetVerificationResults extends AnAction {
                 return;
             }
             editorManager.openFile(virtualFile, true);
-            //Print Additional info
+            //Get entry_id of the selected file
+            String entr_id_selct_file = getLastPart(filesInTmpFolder[selectedFileIndex].getName());
+            //Get metadata for the file 
+            HashMap metadata = list_metadata.get(Integer.parseInt((entr_id_selct_file)));
+            String metadata_str = formatHashMap(metadata);
+            Messages.showInfoMessage(metadata_str,"Metadata-Info");
         }
     }
 
 
-/*
 
- */
-    public void getEntriesLoop(){
+    public ArrayList<HashMap> getEntriesLoop(){
 
         String host = Configurations.verif_service_ip;
         String port = Configurations.verif_service_port;
@@ -106,23 +114,36 @@ public class GetVerificationResults extends AnAction {
         }
 
         if (count== 0) {
-            return;
+            return null;
         }
 
+        /*
+            List of HashMaps to store metada
+            of each entry.
+         */
+        ArrayList<HashMap>  list_map = new ArrayList<HashMap>();
+        HashMap<String, String> metadata_map;
+        //i corressponds to each
+        //entryId, results retrived
+        //inorder
         for (int i=0 ; i<count; i++){
-            getEnrty(i);
+             metadata_map = getEnrty(i);
+             list_map.add(metadata_map);
         }
+
+        return list_map;
     }
 
 /*
     Call get entry to get
     the json files inside the volume
  */
-    public void  getEnrty(int entry_id){
+    public HashMap<String, String> getEnrty(int entry_id){
 
         String host = Configurations.verif_service_ip;
         String port = Configurations.verif_service_port;
 
+        HashMap<String, String>  files_metadata_map= new HashMap<String, String>();
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         //Need the Get request to get the file
@@ -130,34 +151,41 @@ public class GetVerificationResults extends AnAction {
         try {
             CloseableHttpResponse response = httpClient.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
+                //EntryUtils won't show response in debug
                 String json_string = EntityUtils.toString(response.getEntity());
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(json_string);
-                String key="taskId";
-                if (jsonNode.has(key)) {
-                    String value = jsonNode.get(key).asText();
-                    System.out.println("Value for key '" + key + "' is: " + value);
+                String task_id_key="taskId";
+                if (jsonNode.has(task_id_key)) {
+                    String value = jsonNode.get(task_id_key).asText();
+                    System.out.println("Value for key '" + task_id_key + "' is: " + value);
+                    files_metadata_map.put(task_id_key,value);
                 } else {
-                    System.out.println("JSON does not contain key '" + key + "'");
+                    System.out.println("JSON does not contain key '" + task_id_key + "'");
+               }
+                String request_key = "request";
+                String className_key = "className";
+                if (jsonNode.has(request_key) && jsonNode.get(request_key).has(className_key)) {
+                    String value = jsonNode.get(request_key).get(className_key).asText();
+                    System.out.println("Value for key '" + className_key + "' is: " + value);
+                    files_metadata_map.put(className_key,value);
                 }
-                String key2 = "request";
-                if (jsonNode.has(key2)) {
-                    String value = jsonNode.get(key2).get("className").asText();
-                    System.out.println("Value for key '" + key + "' is: " + value);
+                String methodName_key = "methodName";
+                if (jsonNode.has(request_key) && jsonNode.get(request_key).has(methodName_key)) {
+                    String value = jsonNode.get(request_key).get(methodName_key).asText();
+                    System.out.println("Value for key '" + methodName_key + "' is: " + value);
+                    files_metadata_map.put(methodName_key,value);
                 }
-                String key3 = "methodName";
-                if (jsonNode.has(key2)) {
-                    String value = jsonNode.get(key2).get("methodName").asText();
-                    System.out.println("Value for key '" + key + "' is: " + value);
-                }
-                String key4 = "verificationTool";
-                if (jsonNode.has(key2)) {
-                    String value = jsonNode.get(key4).asText();
-                    System.out.println("Value for key '" + key + "' is: " + value);
+                String verificTool_key = "verificationTool";
+                if (jsonNode.has(verificTool_key)) {
+                    String value = jsonNode.get(verificTool_key).asText();
+                    System.out.println("Value for key '" + value + "' is: " + value);
+                    files_metadata_map.put(verificTool_key,value);
                 }
 
             }
             response.close();
+            return files_metadata_map;
 
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -174,7 +202,26 @@ public class GetVerificationResults extends AnAction {
     public static String getLastPart(String string) {
         String[] parts = string.split("_");
         parts = parts[parts.length-1].split(".json");
+        //enrtryId of file
         return parts[parts.length - 1];
+    }
+
+    /*
+     A function for pretty printing the
+     Hash-Map
+     */
+    public static String formatHashMap(HashMap<?, ?> map) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("{");
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            builder.append("\"").append(entry.getKey()).append("\":\"");
+            builder.append(entry.getValue() == null ? "null" : entry.getValue()).append("\",");
+        }
+        if (builder.charAt(builder.length() - 1) == ',') {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        builder.append("}");
+        return builder.toString();
     }
 
 }
