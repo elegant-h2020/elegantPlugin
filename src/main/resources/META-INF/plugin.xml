@@ -30,7 +30,23 @@
 
     <actions>
 
-        <group id="intellijplugin.DialogAction" text="ELEGANT" description="ELEGANT plugin">
+        <group id="b"  text="ELEGANT-Acceleration" description="ELEGANT plugin Acceleration Action">
+            <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
+        </group>
+
+
+        <group id="c"  text="ELEGANT-Verification" description="ELEGANT plugin Verification Actions">
+            <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
+            <action id="com.elegant.plugin.ConfigVerificationAction" class="com.elegant.plugin.ConfigVerificationAction" text="Configure Verification Service IP:Port"></action>
+            <action id="com.elegant.plugin.SetDockerVerificationService" class="com.elegant.plugin.SetDockerVerificationService" text="Start Docker Verification Service"></action>
+            <action id="com.elegant.plugin.CleanDockerVerification" class="com.elegant.plugin.CleanDockerVerification" text="Stop Docker Verification Service"></action>
+            <action id="com.elegant.plugin.VerifyClassAction" class="com.elegant.plugin.VerifyClassAction" text="Verify Code"></action>
+            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="Verify Marked Code with ESBMC"></action>
+            <action id="com.elegant.plugin.GetVerificationStatusAction" class="com.elegant.plugin.GetVerificationStatusAction" text="Get Verification Status"></action>
+            <action id="com.elegant.plugin.GetVerificationResults" class="com.elegant.plugin.GetVerificationResults" text="Get Verification Results"></action>
+        </group>
+
+        <group id="intellijplugin.DialogAction" text="ELEGANT-NES" description="ELEGANT plugin">
             <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
             <action id="com.elegant.plugin.SetDockerEnviroment" class="com.elegant.plugin.SetDockerEnviroment" text="Install ELEGANT-Docker-Sandbox"></action>
             <action id="com.elegant.plugin.CleanDockerAction" class="com.elegant.plugin.CleanDockerAction" text="Remove ELEGANT-Docker Artifacts"></action>
@@ -38,13 +54,6 @@
             <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query Action"></action>
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan "></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
-            <action id="com.elegant.plugin.ConfigVerificationAction" class="com.elegant.plugin.ConfigVerificationAction" text="Configure Ver.Service IP:Port"></action>
-            <action id="com.elegant.plugin.SetDockerVerificationService" class="com.elegant.plugin.SetDockerVerificationService" text="Set Docker Verification Service"></action>
-            <action id="com.elegant.plugin.CleanDockerVerification" class="com.elegant.plugin.CleanDockerVerification" text="Remove Docker VerificationService"></action>
-            <action id="com.elegant.plugin.VerifyClassAction" class="com.elegant.plugin.VerifyClassAction" text="Verify Code"></action>
-            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="Get ESBMC Verification"></action>
-            <action id="com.elegant.plugin.GetVerificationStatusAction" class="com.elegant.plugin.GetVerificationStatusAction" text="Get Verification Status"></action>
-            <action id="com.elegant.plugin.GetVerificationResults" class="com.elegant.plugin.GetVerificationResults" text="Get Verification Results"></action>
         </group>
     </actions>
 

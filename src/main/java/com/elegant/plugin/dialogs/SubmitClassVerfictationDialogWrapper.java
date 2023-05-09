@@ -38,10 +38,10 @@ public class SubmitClassVerfictationDialogWrapper extends com.intellij.openapi.u
                 .setDefaultFill(GridBagConstraints.HORIZONTAL);
 
         panel.setPreferredSize(new Dimension(400,200));
-        panel.add(label("Class"),gb.nextLine().next().weightx(0.2));
+        panel.add(label("Code File (Java Class or C File to be verified, eg. /tmp/Simple.class)"),gb.nextLine().next().weightx(0.2));
         panel.add(class_path,gb.nextLine().next().weightx(0.8));
 
-        panel.add(label("Request"),gb.nextLine().next().weightx(0.2));
+        panel.add(label("Request File (.json File specifying Verification method, eg. /tmp/req.json)"),gb.nextLine().next().weightx(0.2));
         panel.add(request,gb.nextLine().next().weightx(0.8));
 
         return panel;
