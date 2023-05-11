@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.ClassRule;
 import org.testcontainers.containers.DockerComposeContainer;
 
+import java.awt.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -43,6 +44,10 @@ public class SetDockerEnviroment extends AnAction {
             System.out.println(tempNESDirectory);
             String path = tempNESDirectory.toFile().getPath()+"/nebulastream-tutorial/docker-compose-local.yml";
             Process process = Runtime.getRuntime().exec("docker-compose  -f " + path  + " up --force-recreate");
+            if(!process.isAlive() && process.exitValue() !=0  ){
+                Messages.showErrorDialog( e.getProject(), "Error running docker-compose exit value: "+String.valueOf(process.exitValue()),"Error Running docker-compose");
+                return;
+            }
             System.out.println(process.pid());
             Configurations.docker_file_path = path ;
             Configurations.temp_nes_directory = tempNESDirectory.toFile().getPath();
@@ -50,7 +55,7 @@ public class SetDockerEnviroment extends AnAction {
             Configurations.coordinator_ip="localhost";
             Configurations.coordinator_port="8081";
 
-            Messages.showMessageDialog(e.getProject(),"Docker Services are running \n" +
+            Messages.showMessageDialog(e.getProject(),"NES-Docker Services are running \n" +
                     "Visit localhost:3000 for ELEGANT UI\n" +
                     "ELEGANT Coordinator set on port 8081\n" +
                     "Instructions for Keyckloack user administration on \n" +
