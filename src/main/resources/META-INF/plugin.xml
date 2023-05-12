@@ -55,8 +55,17 @@
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan"></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
             <action id="com.elegant.plugin.ViewDashboard" class="com.elegant.plugin.ViewDashboard" text="View Dashboard"></action>
-            <action id="com.elegant.plugin.StartSelectedDockerCompose" class="com.elegant.plugin.StartSelectedDockerCompose" text="Start Selected Docker-Compose"></action>
         </group>
+
+
+        <action id="com.elegant.plugin.StartSelectedDockerCompose" class="com.elegant.plugin.StartSelectedDockerCompose" text="ELEGANT-NES:Start Selected Docker-Compose">
+        <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
+
+
+        <action id="com.elegant.plugin.StopSelectedDockerCompose" class="com.elegant.plugin.StopSelectedDockerCompose" text="ELEGANT-NES:Stop Selected Docker-Compose">
+        <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </action>
 
     </actions>
 
