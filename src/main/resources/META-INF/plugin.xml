@@ -54,7 +54,7 @@
             <action id="com.elegant.plugin.SubmitQueryAction" class="com.elegant.plugin.SubmitQueryAction" text="Submit Query to Coordinator"></action>
             <action id="com.elegant.plugin.GetQueryPlanAction" class="com.elegant.plugin.GetQueryPlanAction" text="Get Query Plan"></action>
             <action id="com.elegant.plugin.GetQueryStatusAction" class="com.elegant.plugin.GetQueryStatusAction" text="Get Query Status"></action>
-            <action id="com.elegant.plugin.ViewDashboard" class="com.elegant.plugin.ViewDashboard" text="View Dashboard"></action>
+<!--            <action id="com.elegant.plugin.ViewDashboard" class="com.elegant.plugin.ViewDashboard" text="View Dashboard"></action> -->
         </group>
 
 

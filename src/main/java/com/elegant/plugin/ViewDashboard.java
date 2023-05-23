@@ -16,10 +16,14 @@ public class ViewDashboard extends AnAction {
         {
             Runtime runtime = Runtime.getRuntime();
             try {
-                runtime.exec("xdg-open " + url);
+
+                Process process = runtime.exec("xdg-open " + url);
+                process.waitFor();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
