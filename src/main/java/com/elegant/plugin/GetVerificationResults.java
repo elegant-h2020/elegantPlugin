@@ -87,7 +87,9 @@ public class GetVerificationResults extends AnAction {
         }
     }
 
-
+/*
+    Iterate over the results of VerificationService
+ */
 
     public ArrayList<HashMap> getEntriesLoop(){
 
@@ -239,8 +241,9 @@ public class GetVerificationResults extends AnAction {
         return builder.toString();
     }
 
-
-
+    /*
+    Return standarized text
+     */
 
     public static String formatHashMaptoString(HashMap<String, String> map) {
         StringBuilder builder = new StringBuilder();
