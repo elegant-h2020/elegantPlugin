@@ -22,33 +22,46 @@ import java.io.IOException;
  * @email iplakas@ubitech.eu
  * @date 5/4/22
  */
+
+/**
+ * Submit Query to NES Coordinator
+ */
 public class SubmitQueryAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        //Retrieve Host and Port of NES Coordinator
         String host = Configurations.coordinator_ip;
         String port = Configurations.coordinator_port;
 
         SubmitQueryDialogWrapper sqdw = new SubmitQueryDialogWrapper();
+
         if (sqdw.showAndGet()){
             //if ok is pressed
+            //Retrieve UserQuery and Placement
             String userQuery = sqdw.userQuerytext;
             String placement = sqdw.placementQuerytext;
+
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("userQuery",userQuery);
             jsonObject.put("strategyName",placement);
 
 
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+            //Create HttpPost
             HttpPost httpPost = new HttpPost("http://"+host+":"+port+"/v1/nes/query/execute-query");
             httpPost.addHeader("content-type", "application/json");
+
             StringEntity stringEntity;
             stringEntity = new StringEntity(jsonObject.toString().replace("\\\\\\","\\"), ContentType.APPLICATION_JSON);
             httpPost.setEntity(stringEntity);
 
             try {
+                //Send httpPost
                 CloseableHttpResponse response = httpClient.execute(httpPost);
                 Messages.showMessageDialog(e.getProject(),userQuery+ " " + placement ,"UserQuery and Placement",Messages.getInformationIcon());
                 Messages.showMessageDialog(e.getProject(), String.valueOf(response.getStatusLine().getStatusCode()),"Status_code",Messages.getInformationIcon());
+
+                //Accepted
                 if(response.getStatusLine().getStatusCode() == 200 || response.getStatusLine().getStatusCode() == 201 ) {
                     String json = EntityUtils.toString(response.getEntity());
                     Messages.showMessageDialog(e.getProject(), json, "ID", Messages.getInformationIcon());
@@ -63,7 +76,6 @@ public class SubmitQueryAction extends AnAction {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-
         }
 
     }

@@ -13,6 +13,11 @@ import java.io.IOException;
  * @email iplakas@ubitech.eu
  * @date 2/24/23
  */
+
+/**
+ * Clean Docker artifacts
+ * of Verification Service
+ */
 public class CleanDockerVerification extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {

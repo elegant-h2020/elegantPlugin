@@ -14,18 +14,25 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+/**
+ * Get Query Status Action from NES
+ */
 public class GetQueryStatusAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        //Create HTTP client
         CloseableHttpClient httpClient =  HttpClients.createDefault();
+        //Retrieve Host and port of NES
         String host = Configurations.coordinator_ip;
         String port = Configurations.coordinator_port;
         String str = Messages.showInputDialog(e.getProject(), "Enter queryID", "Get Status Query", Messages.getInformationIcon());
 
+        //HTTP GET
         HttpGet httpGet = new HttpGet("http://"+host+":"+port+"/v1/nes/queryCatalog/status?queryId=" + str);
         httpGet.setHeader(new BasicHeader("cache-control", "no-cache"));
 
         try {
+            //Retrieve Response
             CloseableHttpResponse response = httpClient.execute(httpGet);
             HttpEntity httpEntity = response.getEntity();
             String result = EntityUtils.toString(httpEntity);
@@ -33,8 +40,6 @@ public class GetQueryStatusAction extends AnAction {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-
     }
 
 }

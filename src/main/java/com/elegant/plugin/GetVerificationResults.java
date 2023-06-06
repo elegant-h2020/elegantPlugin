@@ -31,15 +31,18 @@ import java.util.Map;
  * @email iplakas@ubitech.eu
  * @date 3/28/23
  */
-public class GetVerificationResults extends AnAction {
 
+/**
+ * Retrieve verification results from
+ * NES.
+ */
+public class GetVerificationResults extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
         String volume_dir = Configurations.verif_volume_dir;
         File tmpFolder = new File(volume_dir);
-
 
         //Used to get the result Files and metadata for each file
         ArrayList<HashMap> list_metadata = getEntriesLoop();
@@ -242,7 +245,7 @@ public class GetVerificationResults extends AnAction {
     }
 
     /*
-    Return standarized text
+    Return standardized text
      */
 
     public static String formatHashMaptoString(HashMap<String, String> map) {

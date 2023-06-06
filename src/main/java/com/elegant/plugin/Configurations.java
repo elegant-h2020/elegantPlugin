@@ -5,6 +5,10 @@ package com.elegant.plugin;
  * @email iplakas@ubitech.eu
  * @date 5/26/22
  */
+
+/**
+ * Class to hold public variables
+ */
 public class Configurations {
 
     public static String coordinator_ip;

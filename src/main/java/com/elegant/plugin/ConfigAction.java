@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
  * @email iplakas@ubitech.eu
  * @date 5/26/22
  */
+
+/**
+ * Configure port an IP to
+ * send data to Coordinator
+ */
 public class ConfigAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {

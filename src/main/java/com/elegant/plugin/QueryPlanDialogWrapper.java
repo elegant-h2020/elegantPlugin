@@ -15,6 +15,10 @@ import java.awt.*;
  * @email iplakas@ubitech.eu
  * @date 5/3/22
  */
+
+/**
+ * Simple query plain dialog
+ */
 public class QueryPlanDialogWrapper extends com.intellij.openapi.ui.DialogWrapper {
     JPanel panel = new JPanel(new GridBagLayout());
     JTextField usernamme = new JTextField();

@@ -13,7 +13,9 @@ import org.jetbrains.annotations.NotNull;
  * @date 3/27/23
  */
 
-//TODO: Test this
+/**
+ * Config Verification service port and IP
+ */
 public class ConfigVerificationAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {

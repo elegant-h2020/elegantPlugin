@@ -17,6 +17,10 @@ import static com.elegant.plugin.SetDockerEnviroment.extract;
  * @email iplakas@ubitech.eu
  * @date 2/23/23
  */
+
+/**
+ * Set Docker Artifacts for Verification Service
+ */
 public class SetDockerVerificationService extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -37,9 +41,9 @@ public class SetDockerVerificationService extends AnAction {
                 try (ZipInputStream zipInputStream = new ZipInputStream(verifFolder)) {
                     // Extract the zip contents and keep in temp directory
                     extract(zipInputStream, tempVERIFDirectory.toFile());
-
                 }
             }
+
             String path = tempVERIFDirectory.toFile().getPath()+"/Elegant-Code-Verification-Service-main/";
             File f_path = new File(path);
 
@@ -56,12 +60,14 @@ public class SetDockerVerificationService extends AnAction {
 
             //process.waitFor();
 
+            //Delete docker volume
             Process process_cr_volume = Runtime.getRuntime().exec(
                     "docker volume create service_files"
             );
-
+            //Wait for process to finish
             process_cr_volume.waitFor();
 
+            //Run docker container
             Process process2 = Runtime.getRuntime().exec(
                     "docker run --name elegant-code-verification-container -v "+Configurations.verif_volume_dir+":/service/files -i -p 8080:8080 code-verification-service-container",null,f_path);
 

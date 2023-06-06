@@ -22,16 +22,19 @@ import java.util.zip.ZipInputStream;
  * @email iplakas@ubitech.eu
  * @date 6/7/22
  */
+
+/**
+ * Set Docker-artifacts for NES
+ */
 public class SetDockerEnviroment extends AnAction {
     @Override
     @ClassRule
     public void actionPerformed(@NotNull AnActionEvent e) {
-       /*  DockerComposeContainer environment =
-                new DockerComposeContainer(new File("src/main/resources/compose-test.yml"));*/
-        try {
 
+        try {
             //Copy zip to temp Folder
             InputStream nesFolder = getClass().getClassLoader().getResourceAsStream("nes.zip");
+            //Create tempDir
             Path tempNESDirectory = Files.createTempDirectory("nes");
 
             if (nesFolder != null) {
@@ -42,19 +45,25 @@ public class SetDockerEnviroment extends AnAction {
             }
 
             System.out.println(tempNESDirectory);
+            //Get path of tempNESDir
             String path = tempNESDirectory.toFile().getPath()+"/nebulastream-tutorial/docker-compose-local.yml";
+            //Execute docker-compose command
             Process process = Runtime.getRuntime().exec("docker-compose  -f " + path  + " up --force-recreate");
+
             if(!process.isAlive() && process.exitValue() !=0  ){
                 Messages.showErrorDialog( e.getProject(), "Error running docker-compose exit value: "+String.valueOf(process.exitValue()),"Error Running docker-compose");
                 return;
             }
+
             System.out.println(process.pid());
+            //Retrive Paths
             Configurations.docker_file_path = path ;
             Configurations.temp_nes_directory = tempNESDirectory.toFile().getPath();
             //Default values of Configuration
             Configurations.coordinator_ip="localhost";
             Configurations.coordinator_port="8081";
 
+            //Show Dialog
             Messages.showMessageDialog(e.getProject(),"NES-Docker Services are running \n" +
                     "Visit localhost:3000 for ELEGANT UI\n" +
                     "ELEGANT Coordinator set on port 8081\n" +
@@ -74,7 +83,6 @@ public class SetDockerEnviroment extends AnAction {
             System.out.println(line);
         }
     }
-
 
 
     public static void extract(ZipInputStream zip, File target) throws IOException {

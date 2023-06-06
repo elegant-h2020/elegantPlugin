@@ -24,14 +24,20 @@ import java.io.IOException;
  * @email iplakas@ubitech.eu
  * @date 3/13/23
  */
+
+/**
+ * Verify Java class using JBMC
+ */
 public class VerifyClassAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+
+        //Retrieve verification IP and Port
         String host = Configurations.verif_service_ip;
         String port = Configurations.verif_service_port;
 
-
+        //Show dialog
         SubmitClassVerfictationDialogWrapper vqdw = new SubmitClassVerfictationDialogWrapper();
         if (vqdw.showAndGet()) {
             //if ok is pressed
@@ -48,7 +54,9 @@ public class VerifyClassAction extends AnAction {
 
 
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+            //Create HttpPost
             HttpPost httpPost = new HttpPost("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/newEntry");
+
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addPart("file", new FileBody(new File(class_path)))
                     .addPart("request", new FileBody(new File(request)))

@@ -12,6 +12,11 @@ import java.io.IOException;
  * @email iplakas@ubitech.eu
  * @date 6/14/22
  */
+
+/**
+ * Clean docker artifacts related
+ * to NES
+ */
 public class CleanDockerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {

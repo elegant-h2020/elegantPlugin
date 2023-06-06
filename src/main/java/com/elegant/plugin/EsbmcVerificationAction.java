@@ -35,10 +35,16 @@ import java.nio.file.Files;
  * @email iplakas@ubitech.eu
  * @date 3/14/23
  */
+
+/**
+ * Selected *.c file will be verified
+ * by utilizing the ESBMC service
+ */
 public class EsbmcVerificationAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
 
+        //Retrieve the host and port of the service
         String host = Configurations.verif_service_ip;
         String port = Configurations.verif_service_port;
 
@@ -60,7 +66,7 @@ public class EsbmcVerificationAction extends AnAction {
                 //Write the "copied" contents
                 Files.write(temp,codeString.getBytes(StandardCharsets.UTF_8));
 
-                //Creating a JSONObject object
+                //Creating a JSONObject
                 JSONObject jsonObject = new JSONObject();
                 //Inserting key-value pairs into the json object
                 jsonObject.put("tool", "ESBMC");
@@ -74,8 +80,6 @@ public class EsbmcVerificationAction extends AnAction {
                 Files.write(request_file,escaped_str.getBytes(StandardCharsets.UTF_8));
 
                 //POST METHOD CREATION
-
-
                 CloseableHttpClient httpClient = HttpClientBuilder.create().build();
                 HttpPost httpPost = new HttpPost("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/newEntry");
                 HttpEntity entity = MultipartEntityBuilder.create()
@@ -89,7 +93,7 @@ public class EsbmcVerificationAction extends AnAction {
                     CloseableHttpResponse response = httpClient.execute(httpPost);
                     //Show response message
                     Messages.showMessageDialog(e.getProject(), String.valueOf(response.getStatusLine().getStatusCode()), "Status_code", Messages.getInformationIcon());
-
+                    //If successful request
                     if (response.getStatusLine().getStatusCode() == 202) {
                         String json = EntityUtils.toString(response.getEntity());
                         Messages.showMessageDialog(e.getProject(), json, "Class Submitted for verification", Messages.getInformationIcon());

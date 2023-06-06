@@ -10,6 +10,11 @@ import org.jetbrains.annotations.NotNull;
  * @email iplakas@ubitech.eu
  * @date 5/3/22
  */
+
+/**
+ * Simple example of Dialog action with
+ *  a Dialog wrapper
+ */
 public class DialogInputAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
