@@ -10,9 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+/**
+ * Stop Selected Docker compose
+ */
 public class StopSelectedDockerCompose extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        //Get slected file
         VirtualFile selectedFile = e.getDataContext().getData(com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE);
 
 
@@ -44,7 +48,7 @@ public class StopSelectedDockerCompose extends AnAction {
     }
 
     /*
-Check if is Docker-File string
+Check if is Docker-File contains valid substring
  */
     public boolean isDockerComposeFile(String str){
         if (str == null) {

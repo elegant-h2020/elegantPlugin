@@ -16,6 +16,9 @@ import java.awt.*;
  * @date 5/4/22
  */
 
+/**
+ * Dialog Wrapper for submit query Action
+ */
 public class SubmitQueryDialogWrapper extends com.intellij.openapi.ui.DialogWrapper {
     JPanel panel = new JPanel(new GridBagLayout());
     JTextField userQuery = new JTextField();

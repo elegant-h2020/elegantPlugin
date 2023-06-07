@@ -15,6 +15,11 @@ import java.awt.*;
  * @email iplakas@ubitech.eu
  * @date 5/26/22
  */
+
+/**
+ * Dialog Wrapper to retrive
+ * host and port
+ */
 public class ConfigDialogWrapper extends com.intellij.openapi.ui.DialogWrapper  {
 
     JPanel panel = new JPanel(new GridBagLayout());

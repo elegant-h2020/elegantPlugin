@@ -16,6 +16,11 @@ import java.awt.*;
  * @email iplakas@ubitech.eu
  * @date 3/21/23
  */
+
+/**
+ * Dialow wrapper tp
+ * retrive entryId
+ */
 public class GetVerificationEnrtryDialogWrapper extends com.intellij.openapi.ui.DialogWrapper{
     JPanel panel = new JPanel(new GridBagLayout());
     JTextField entry= new JTextField();

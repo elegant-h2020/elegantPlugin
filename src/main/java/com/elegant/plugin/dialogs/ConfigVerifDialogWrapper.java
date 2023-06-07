@@ -27,6 +27,11 @@ import static com.intellij.openapi.ui.DialogWrapper.OK_EXIT_CODE;
  * @email iplakas@ubitech.eu
  * @date 3/27/23
  */
+
+/**
+ * Dialog wrapper to retrive host and
+ * port for Verification Service
+ */
 public class ConfigVerifDialogWrapper extends com.intellij.openapi.ui.DialogWrapper {
 
     JPanel panel = new JPanel(new GridBagLayout());

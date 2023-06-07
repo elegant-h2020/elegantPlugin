@@ -15,6 +15,12 @@ import java.awt.*;
  * @email iplakas@ubitech.eu
  * @date 3/13/23
  */
+
+/**
+ * Dialog wrapper to set path
+ * of class to be verified along with
+ * request
+ */
 public class SubmitClassVerfictationDialogWrapper extends com.intellij.openapi.ui.DialogWrapper  {
     JPanel panel = new JPanel(new GridBagLayout());
     JTextField class_path = new JTextField();

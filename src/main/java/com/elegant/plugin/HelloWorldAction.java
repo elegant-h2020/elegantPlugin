@@ -14,6 +14,10 @@ import java.net.*;
  * @email iplakas@ubitech.eu
  * @date 4/28/22
  */
+
+/**
+ * Simple example action
+ */
 public class HelloWorldAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {

@@ -21,12 +21,18 @@ import java.io.IOException;
  * @email iplakas@ubitech.eu
  * @date 3/21/23
  */
+
+/**
+ * Get Status of Queries from  Verification Service
+ */
 public class GetVerificationStatusAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        //Retrieve Host and Port
         String host = Configurations.verif_service_ip;
         String port = Configurations.verif_service_port;
 
+        //Get Dialog
         GetVerificationEnrtryDialogWrapper gqvw = new GetVerificationEnrtryDialogWrapper();
         if (gqvw.showAndGet()) {
             //if ok is pressed
@@ -37,21 +43,22 @@ public class GetVerificationStatusAction extends AnAction {
                 throw new RuntimeException("Entry runtime");
             }
 
+            //Create HttpClient
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
             HttpGet httpGet = new HttpGet("http://" + host + ":" + port + "/Elegant-Code-Verification-Service-1.0-SNAPSHOT/api/verification/getEntry?entryId="+entry_id);
             try {
+                //Send HttpGet
                 CloseableHttpResponse response = httpClient.execute(httpGet);
                 Messages.showMessageDialog(e.getProject(), String.valueOf(response.getStatusLine().getStatusCode()), "Status_code", Messages.getInformationIcon());
+                //If successful request
                 if (response.getStatusLine().getStatusCode() == 200) {
                     String json_string = EntityUtils.toString(response.getEntity());
-
                     JSONParser parser = new JSONParser();
                     JSONObject json = (JSONObject) parser.parse(json_string);
-
                     Messages.showMessageDialog(e.getProject(), json.getAsString("status"), "Entry Status", Messages.getInformationIcon());
                 }
-                response.close();
 
+                response.close();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             } catch (ParseException ex) {
