@@ -5,18 +5,15 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>ELEGANTPlugin</name>
+    <name>ELEGANT</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">Ubitech</vendor>
+    <vendor email="info-elegant@exus.co.uk" url="https://www.elegant-h2020.eu/">Ubitech</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
-  ]]></description>
+    <description>Plugin that assists users of the ELEGANT platform for the development, testing, verification and deployment of their applications.</description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -30,9 +27,10 @@
 
     <actions>
 
-        <group id="b"  text="ELEGANT-Acceleration" description="ELEGANT plugin Acceleration Action">
-            <add-to-group group-id="MainMenu" anchor="first"></add-to-group>
-        </group>
+<!--        <group id="b"  text="ELEGANT-Acceleration" description="ELEGANT plugin Acceleration Action">-->
+<!--            <add-to-group group-id="MainMenu" anchor="first"></add-to-group>-->
+<!--            <action id="com.elegant.plugin.DialogAction" class="com.elegant.plugin.DialogAction" text="Hello world Acceleration"></action>-->
+<!--        </group>-->
 
 
         <group id="c"  text="ELEGANT-Verification" description="ELEGANT plugin Verification Actions">
@@ -40,8 +38,8 @@
             <action id="com.elegant.plugin.ConfigVerificationAction" class="com.elegant.plugin.ConfigVerificationAction" text="Configure Verification Service IP:Port"></action>
             <action id="com.elegant.plugin.SetDockerVerificationService" class="com.elegant.plugin.SetDockerVerificationService" text="Start Docker Verification Service"></action>
             <action id="com.elegant.plugin.CleanDockerVerification" class="com.elegant.plugin.CleanDockerVerification" text="Stop Docker Verification Service"></action>
-            <action id="com.elegant.plugin.VerifyClassAction" class="com.elegant.plugin.VerifyClassAction" text="Verify Code"></action>
-            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="Verify Marked Code with ESBMC"></action>
+            <action id="com.elegant.plugin.VerifyClassAction" class="com.elegant.plugin.VerifyClassAction" text="Verify Source Code File"></action>
+            <action id="com.elegant.plugin.EsbmcVerificationAction" class="com.elegant.plugin.EsbmcVerificationAction" text="Verify Marked Source Code"></action>
             <action id="com.elegant.plugin.GetVerificationStatusAction" class="com.elegant.plugin.GetVerificationStatusAction" text="Get Verification Status"></action>
             <action id="com.elegant.plugin.GetVerificationResults" class="com.elegant.plugin.GetVerificationResults" text="Get Verification Results"></action>
         </group>
