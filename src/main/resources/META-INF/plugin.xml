@@ -13,7 +13,44 @@
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-    <description>Plugin that assists users of the ELEGANT platform for the development, testing, verification and deployment of their applications.</description>
+    <description><![CDATA[
+    <style>
+        /* CSS for bold list items */
+        ul.bold-list li:before {
+
+        font-weight: bold; /* Make the bullet and text bold */
+        margin-right: 0.5em; /* Add some spacing between bullet and text */
+        }
+    </style>
+        <body>
+            <h1>ELEGANT</h1>
+            <p>Allows developers to create operators in a simple and effective way and to perform verification checks on the code. Data operators constitute the basic building blocks to build Big Data/IoT applications. Data operators are implemented in a way that enables their execution on both the IoT side and the Big Data side.</p>
+
+            <p>The provided NebulaStream APIs are the base to produce the intermediate software layers for transforming the code to be compatible for execution on IoT devices and the Big Data stack.</p>
+
+            <h2>Plugin Functionalities:</h2>
+
+            <h3>ELEGANT Core Functions:</h3>
+            <ul class="bold-list">
+                <li><strong>DockerSandbox:</strong> Setting up a docker environment with all necessary services to execute queries and access the UI of the platform. Also, the UI configurations mechanism allows for more complex setups of the platform.</li>
+                <li><strong>Submit Query:</strong> The user can submit a query to the platform. The execution of it takes place to either Cloud or Edge Nodes according to the placement policies.</li>
+                <li><strong>Configure Host:</strong> To submit queries via the Elegant API, the host and port of the NebulaStream Coordinator need to be specified. Users can provide this information for queries and monitoring activities to commence.</li>
+                <li><strong>Get Status of Query:</strong> After submission, the ID of the query is provided. Users can utilize this information and monitor the state of the submitted queries for debugging and time-estimation purposes.</li>
+                <li><strong>Get Query Plan:</strong> The execution of the query processed by the NebulaStream Coordinator follows several placement policies and optimization procedures. Such information is displayed by simply providing the ID of the query.</li>
+                <li><strong>Clean Docker Artifacts:</strong> By setting a docker sandbox environment, docker containers run in the background of the system. Also, temporary directories containing configuration files and input data are produced. The user can easily remove this content and reclaim space by using this functionality.</li>
+            </ul>
+
+            <h3>ELEGANT Verification functionalities:</h3>
+            <ul class="bold-list">
+                <li><strong>Configure Verification Service:</strong> Configure the IP and port of the verification service, enabling the usage of a local or remote server of the ELEGANT verification service.</li>
+                <li><strong>Start Docker / Stop Docker:</strong> Setting through Docker all necessary containers for running and stopping the verification service.</li>
+                <li><strong>Verify Code:</strong> Can be used by the developers to verify the Java class files.</li>
+                <li><strong>Verify Marked Code:</strong> Allows the verification of the code that has been selected.</li>
+                <li><strong>Get verification status:</strong> Provides the status of the verification process based on the provided id.</li>
+                <li><strong>Get verification results:</strong> Provides verification results, based on the provided id.</li>
+            </ul>
+        </body>]]>
+    </description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
