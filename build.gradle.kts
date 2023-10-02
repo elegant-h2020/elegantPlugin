@@ -1,12 +1,12 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.13.1"
+    id("org.jetbrains.intellij") version "1.15.0"
     id ("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 
 group = "com.elegant"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
