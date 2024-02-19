@@ -6,7 +6,7 @@ plugins {
 
 
 group = "com.elegant"
-version = "1.0.1"
+version = "1.0.3"
 
 repositories {
     mavenCentral()

@@ -69,7 +69,7 @@ public class SetDockerVerificationService extends AnAction {
 
             //Run docker container
             Process process2 = Runtime.getRuntime().exec(
-                    "docker run --name elegant-code-verification-container -v "+Configurations.verif_volume_dir+":/service/files -i -p 8080:8080 code-verification-service-container",null,f_path);
+                    "docker run --name elegant-code-verification-container -v "+Configurations.verif_volume_dir+":/service/files -i -p 8080:8080 beehivelab/code-verification-service-container:demo",null,f_path);
 
 
             Configurations.temp_verific_directory = tempVERIFDirectory.toFile().getPath();
